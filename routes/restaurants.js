@@ -15,10 +15,11 @@ router.get("/restaurants", function (req, res) {
   }
   const restaurantArr = resData.getStoredRestaurants();
   restaurantArr.sort((a, b) => {
-    if (
-      (order === "asc" && a.name > b.name) ||
-      (order === "desc" && b.name > a.name)
-    ) {
+//added to lower case so it will be sorted correctly even with capital letters
+    if 
+      (order === "asc" && a.name.toLowerCase() > b.name.toLowerCase() ||
+       order === "desc" && b.name.toLowerCase() > a.name.toLowerCase())
+     {
       return 1;
     }
     return -1;
@@ -38,9 +39,9 @@ router.get("/restaurants/:id", function (req, res) {
     .find((e) => e.id === restaurantId);
   if (restaurant) {
     res.render("restaurants-detail", { rest: restaurant });
-  } else {
+  } 
     res.status(404).render("404");
-  }
+
 });
 
 router.get("/recommend", function (req, res) {
